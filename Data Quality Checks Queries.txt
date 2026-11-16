@@ -1,0 +1,18 @@
+select * from employee 
+where employee_name is null or department is null; 
+
+select employee_id, count(*) from employee 
+group by employee_id
+having count(*) > 1;
+
+select * from employee
+where salary <= 0;
+
+select * from employee 
+where email not like '%_@_%._%';
+
+select * from employee 
+where trim(employee_name) = '';
+
+select * from employee
+where department not in('IT', 'Finance', 'Sales');

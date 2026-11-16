@@ -1,0 +1,40 @@
+select employee_id, count(*) from employee
+group by employee_id
+having count(*) > 1;
+
+select email, count(*) from employee
+group by email 
+having count(*) > 1;
+
+select employee_name, department, salary, count(*)from employee
+group by employee_name, department, salary 
+having count(*) > 1;
+
+with duplicates as(
+	select *,
+		ROW_NUMBER() OVER(
+			partition by employee_id
+            order by employee_id
+		) as rn 
+	from employee
+)
+select * 
+from duplicates
+where rn = 1;
+
+delete from employee
+where id IN(
+	select id
+    from(
+		select id,
+			row_number() over(
+				partition by employee_id
+                order by id
+			) as rn
+		from employee
+	) as temp
+    where rn > 1
+);
+
+select distinct * from employee; 
+

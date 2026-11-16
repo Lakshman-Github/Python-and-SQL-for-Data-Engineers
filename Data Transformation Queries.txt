@@ -1,0 +1,47 @@
+select upper(employee_name) as employee_name
+from employee;
+
+select lower(employee_name) as employee_name
+from employee;
+
+select concat(first_name, ' ' ,last_name) as full_name
+from employee;
+
+select trim(employee_name) as employee_name
+from employee;
+
+select replace(city, 'Chennai', 'Madras') as city 
+from employee;
+
+select round(salary, 0) as salary
+from employee;
+
+select 
+	employee_name,
+    salary,
+    case 
+		when salary >= 50000 then 'High'
+        when salary >= 30000 then 'Medium'
+        else 'Low'
+	end as salary_category
+from employee;
+
+select 
+	employee_name,
+    coalesce(city, 'Unknown') as city
+from employee;
+
+select cast(salary as char) as salary 
+from employee;
+
+select date_format(joining_date, '%d-%m-%Y') as joining_date
+from employee;
+
+select abs(salary) as salary
+from employee;
+
+select 
+	employee_name,
+    ISFULL(department, 'Not Assigned') as department
+from employees;
+

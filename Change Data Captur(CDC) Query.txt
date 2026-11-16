@@ -1,0 +1,32 @@
+create table source_employee(
+employee_id INT primary key,
+employee_name varchar(100),
+salary decimal(10,2),
+last_updated datetime
+);
+
+create table employee_cdc(
+employee_id INT,
+employee_name varchar(100),
+salary decimal(10,2),
+operation_type varchar(10),
+change_time datetime
+);
+
+create trigger employee_update_cdc
+after update on source_employee
+for each row
+insert into employee_cdc
+values(
+	new.employee_id,
+    new.employee_name,
+    new.salary,
+    'UPDATE',
+    NOW()
+);
+
+update source_employee
+set salary = 50000
+where employee_id = 1;
+
+select * from employee_cdc; 

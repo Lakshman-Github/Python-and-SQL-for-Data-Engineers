@@ -1,0 +1,11 @@
+select * from employee where employee_name is null;
+
+select employee_id, count(*) from employee
+group by employee_id
+having count(*) > 1;
+
+select * from employee
+where salary <= 0;
+
+select * from employee 
+where email not like '%_@_%._%';

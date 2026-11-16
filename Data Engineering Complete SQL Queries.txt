@@ -1,0 +1,967 @@
+create database test
+
+create table test.demo(sno int);
+
+insert into test.demo values(1);
+
+select * from test.demo
+
+show databases;
+
+use test
+create database de_project;
+use de_project;
+
+create table test(sno int, name varchar(100));
+select * from test
+
+insert into test(sno, name) values(2,'nandhini');
+
+update test set name='sbgowtham', sno=1 where sno=3;
+
+delete from test where sno=1;
+
+truncate table test
+
+drop table test
+
+create table employees(
+employee_id INT PRIMARY KEY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+hire_date DATE,
+salary DECIMAL(10,2)
+);
+
+show tables;
+
+create table high_paid_employees as
+select
+employee_id,
+first_name,
+last_name,
+salary
+from employees
+where salary>60000;
+
+create temporary table temp_high_paid_employees(
+employee_id INT,
+salary decimal(10,2)
+);
+
+insert into temp_high_paid_employees
+select
+employee_id,
+salary
+from employees
+where salary > 60000;
+
+with high_salary_cte as(
+select employee_id, first_name, last_name, salary
+from employees
+where salary > 70000
+)
+
+drop table if exists employees;
+
+create table employees(
+employeeid INT PRIMARY KEY,
+firstname varchar(50),
+lastname varchar(50)
+);
+
+alter table employees
+add email varchar(100);
+
+select * from employees
+
+alter table employees rename to employees_123
+
+select * from employees_123
+
+create database uber;
+
+use uber;
+
+ create table rider(
+ ride_id int primary key,
+ driver_id int,
+ rider_id int, 
+ pickup_location varchar(100),
+ dropoff_location varchar(100),
+ ride_date datetime,
+ fare decimal(10,2)
+ );
+
+ 
+ insert into rider (ride_id, driver_id, rider_id, pickup_location, dropoff_location, ride_date, fare)
+ values 
+ (1, 101, 201, 'Chennai', 'Coimbatore', '2024-12-29 08:00:00', 500.00),
+ (2, 101, 202, 'Pattandur Agrahara', 'Majestic', '2024-12-29 10:00:00', 900.00),
+ (3, 101, 203, 'Rohini Theatre', 'Koyambedu bus stand', '2024-12-29 12:00:00', 400.00),
+ (4, 101, 204, 'Sky Coliving PG', 'Global Axis', '2024-12-29 14:00:00', 600.00),
+ (5, 101, 205, 'Coimbatore', 'Chennai', '2024-12-29 16:00:00', 700.00);
+ 
+ 
+ select * 
+ from rider 
+ where fare>500 and dropoff_location = 'Chennai'
+ order by fare ASC;
+ 
+ describe rider;
+ 
+ drop table rider;
+ 
+create table rides(
+ ride_id int,
+ driver_id int not null,
+ rider_id int not null, 
+ pickup_location varchar(100) not null,
+ dropoff_location varchar(100) not null,
+ ride_date datetime not null,
+ fare decimal(10,2) not null
+ );
+ 
+ alter table rides
+ drop primary key,
+ add primary key(ride_id,rider_id)
+ 
+ select * from rides;
+ 
+insert into rides (ride_id, driver_id, rider_id, pickup_location, dropoff_location, ride_date, fare)
+values 
+(2, 101, 202, 'Chennai', 'Coimbatore', '2024-12-29 08:00:00', 500.00);
+
+describe rides
+
+delete from rides where ride_id=2;
+
+create table users(
+user_id INT PRIMARY KEY,
+email VARCHAR(100) UNIQUE
+);
+
+insert into users(user_id, email)
+values
+(2, 'user2@example.com');
+
+update users
+set email = 'user1@example.com'
+where user_id = 1;
+
+insert into users(user_id, email)
+values
+(3, NULL);
+
+select * from users;
+
+INSERT into users(user_id, email)
+values(4, NULL);
+
+ create table rides(
+ ride_id int,
+ driver_id int not null,
+ rider_id int, 
+ pickup_location varchar(100) not null,
+ dropoff_location varchar(100) not null,
+ ride_date datetime not null,
+ fare decimal(10,2) not null
+ );
+ 
+insert into rides (ride_id, driver_id, rider_id, pickup_location, dropoff_location, ride_date, fare)
+values 
+(4, 101, NULL, 'Chennai','Coimbatore', '2024-12-29 08:00:00', 500.00);
+
+select * from rides
+
+ create table rides(
+ ride_id int,
+ driver_id int not null,
+ rider_id int, 
+ pickup_location varchar(100) not null,
+ dropoff_location varchar(100) not null,
+ ride_date datetime not null,
+ fare decimal(10,2) not null check (fare>0)
+ );
+ 
+ drop table rides;
+ 
+insert into rides (ride_id, driver_id, rider_id, pickup_location, dropoff_location, ride_date, fare)
+values 
+(4, 101, NULL, 'Chennai','Coimbatore', '2024-12-29 08:00:00', -100.00);
+
+create table drivers(
+driver_id INT PRIMARY KEY,
+driver_name VARCHAR(100),
+license_number varchar(50) UNIQUE
+);
+
+create table rides(
+ride_id INT primary key,
+driver_id INT,
+pickup_location varchar(100),
+dropoff_location varchar(100),
+ride_date datetime,
+fare decimal(10,2),
+foreign key (driver_id) references drivers(driver_id)
+);
+
+select * from rides;
+
+describe rides;
+
+insert into drivers(driver_id, driver_name, license_number)
+values
+(101, 'John Doe', 'XYZ12345'),
+(102, 'Jane Smith', 'ABC67850');
+
+Insert into rides(ride_id, driver_id, pickup_location, dropoff_location, ride_date, fare)
+values 
+(301, 101, 'Chennai', 'Coimbatore', '2024-12-01 08:00:00', 500.00),
+(302, 101, 'Chennai', 'Madurai', '2024-12-01 09:00:00', 600.00),
+(303, 102, 'Chennai', 'Hyderabad', '2024-12-01 10:00:00', 700.00);
+
+select * from rides
+
+drop table rides; 
+
+alter table rides add column is_delete boolean default false;
+
+create table demo1(sno int, name varchar(100), country varchar(3) default 'ind');
+
+select * from demo1
+describe demo1
+
+insert into demo1(sno, name,country) 
+values
+(1, 'gowtham','USA');
+
+create table dim_customer(
+customer_key INT AUTO_INCREMENT, -- Surrogate Key
+aadhar_number INT NOT NULL PRIMARY KEY,  -- Natural Key
+customer_name varchar(100),
+city varchar(100),
+effective_date DATE,
+end_date DATE,
+is_current BOOLEAN
+);
+
+select 
+case 
+     when 8>10 then 'true'
+     when 10>8 then 'false'
+     else 'false'
+end as test
+
+select
+	customer_name,
+    amount,
+    case 
+		when amount > 4000 then 'high spender'
+        when amount between 2000 and 4000 then 'Medium spender'
+        when amount <= 2000 then 'low spender'
+	else 'No Data'
+    end as spending 
+from CustomerData
+
+select 
+
+customer_name,
+case 
+	when email is null and phone_number is null then '9999'
+	when phone_number is null then email 
+    else phone_number
+end as contact
+from CustomerData
+
+select * from CustomerData limit 2;
+
+create table CustomerData
+(
+id int primary key not null, 
+customer_name varchar(100),
+email varchar(100),
+phone_number bigint, 
+address varchar(100),
+amount int
+);
+
+select * from CustomerData
+
+alter table CustomerData
+MODIFY column phone_number BIGINT;
+
+
+insert into CustomerData(id, customer_name, email, phone_number, address, amount)
+values 
+(1, 'Ravi', 'ravi@example.com', 9876543210, 'Chennai', 500),
+(2, 'Priya', NULL, 9876543211, 'Bangalore', NULL),
+(3, 'Arjun', 'arjun@example.com', NULL, 'Hyderabad', 1500),
+(4, 'Meena', NULL, NULL, 'Mumbai', 2500),
+(5, 'Karhik', 'karthik@example.com', 9876543222, NULL, 3000);
+
+select * from CustomerData;
+
+select count(*) as count from CustomerDAta where phone_number is not null;
+
+insert into CustomerData(id, customer_name, email, phone_number, address, amount)
+values 
+(6, 'gowtham', 'gow@example.com', '9876', 'null', 5000);
+
+select count(*) from CustomerData where address = 'null' or address IS NULL;
+
+select * from CustomerData
+
+select 
+id,
+customer_name,
+amount,
+coalesce(amount, '0.00')
+from CustomerData
+
+select 
+length(customer_name) as name_length, 
+upper(city), lower(city), 
+concat (customer_name,'-',city) as name_c,
+SUBSTRING(customer_name,1,5) as name_prefix,
+TRIM ('  chennai  ') AS trimed_city,
+LTRIM (' chennai') AS trimed_city,
+RTRIM ('chennai  ') AS trimed_city,
+LPAD(customer_name,15, '*')AS left_padded_name,
+RPAD(customer_name,15, '*')AS right_padded_name,
+REPLACE(customer_name,' ','_') as updated_name,
+left(customer_name, 5) AS first_5_chars,
+right(customer_name, 5) AS first_5_chars
+from CustomerData;
+
+Alter table CustomerData 
+rename column address to city;
+
+create table customer(
+customer_id int primary key not null,
+customer_name varchar(100),
+city varchar(100)
+)
+
+select * from customer;
+
+insert into customer(customer_id, customer_name, city)
+values
+(1, 'Ravi Kumar', 'Chennai'),
+(2, 'Priya Sharma', 'Bangalore'),
+(3, 'Arjun Mehta', 'Hyderabad'),
+(4, 'Meena Gupta', 'Mumbai'),
+(5, 'Karthik Raj', 'Chennai');
+
+select customer_name from customer;
+
+select 
+customer_name,
+(select max(order_amount) from orders) as max_order_amount
+from customers
+
+select distinct customer_id 
+	from orders
+    where order_amount >= 5000
+    
+select name_length from(
+select 
+id, customer_name
+from CustomerDetails) as subquery
+
+select 
+	customer_name,
+    case 
+		when (select sum(order_amount) from orders where orders.customer_id = customers.customer_id) >
+			 (select avg(order_amount) from orders) then 'Abover average'
+		else 'below average'
+	end as order_category
+from customers;
+
+create table employees(
+employee_id int primary key not null,
+first_name varchar(100),
+last_name varchar(100),
+hire_date date,
+job_title varchar(100),
+salary decimal(10,2)
+);
+
+insert into employees(employee_id, first_name, last_name, hire_date, job_title, salary)
+values 
+(1, 'John', 'Doe', '2022-05-01', 'Software Engineer', 85000.00),
+(2, 'Jane', 'Smith', '2022-05-03', 'Data Scientist', 92000.00),
+(3, 'Alice', 'Johnson','2022-05-06', 'Engineer', 95000.00),
+(4, 'Mark', 'Tayler','2022-05-09', 'Manager', 100000.00),
+(5, 'Gowtham', 'sb','2022-05-11', 'Data Engineer', 10000.00),
+(6, 'Peter', 'sb', '2022-05-13', 'Data Engineer', 120000.00);
+
+select * from employees
+
+create view high_earners as
+select employee_id, first_name, last_name, salary
+from employees
+where salary > 90000;
+
+select * from high_earners;
+
+create table restaurants
+(
+id int primary key,
+name varchar(100) not null,
+location varchar(100) not null
+);
+
+create table orders
+(
+order_id int primary key,
+restaurant_id  int not null,
+order_date date not null
+);
+
+insert into restaurants(id, name, location)
+values
+(1, 'ABC Bistro', 'New York'),
+(2, 'The Foodie', 'Los Angeles'),
+(3, 'Tasty Treat', 'Chicago');
+
+insert into orders(order_id, restaurant_id, order_date)
+values
+(1, 1, '2023-01-01'),
+(2, 1, '2023-01-02'),
+(3, 2, '2023-01-05'),
+(4, 4, '2023-01-07');
+
+select name,order_date
+from restaurants as r
+INNER JOIN orders as o
+ON r.id = o.restaurant_id;
+
+select name, order_date
+from restaurants as r
+left join orders as o
+ON r.id = o.restaurant_id
+
+UNION
+
+select name, order_date
+from restaurants as r
+right join orders as o
+ON r.id = o.restaurant_id;
+
+create table tableA(
+id int,
+name varchar(100)
+);
+
+create table tableB(
+id int,
+city varchar(100)
+);
+
+insert into tableA(id, name)
+values
+(1, 'Bob'),
+(2, 'Alice'),
+(3, 'Carol');
+
+insert into tableB(id, city)
+values 
+(1, 'Dallas'),
+(2, 'Chicago'),
+(3, 'Boston');
+
+select a.id, a.name 
+from tableA as a
+left join tableB as b
+ON a.id = b.id
+UNION
+select b.id, b.city
+from tableA as a
+right join tableB as b
+ON a.id = b.id;
+
+drop table if exists employees;
+
+create table employees (
+id int primary key, 
+name varchar(100) not null,
+manager_id int null
+);
+
+insert into employees(id, name, manager_id)
+values 
+(1, 'Alice', 3),
+(2, 'Bob', 3),
+(3, 'Charlie', NULL),
+(4, 'Diana', 3);
+
+select * from employees; 
+
+select e.id, s.name , e.name as manager_name, s.manager_id
+from employees as e
+join employees as s
+on e.id = s.manager_id;
+
+create table store(
+TransactionID int primary key,
+Store varchar(50),
+Sales_Amount decimal(10,2)
+); 
+
+insert into store(TransactionID, Store, Sales_Amount)
+values 
+(1, 'A', 100.00),
+(2, 'B', 200.00),
+(3, 'A', 150.00),
+(4, 'B', 250.00),
+(5, 'B', 300.00);
+
+select * from store;
+
+select store, sum(Sales_Amount) from store
+group by store;
+
+select TransactionID, Store, Sales_Amount, 
+	SUM(Sales_Amount) OVER (PARTITION BY Store order by TransactionID desc) as TotalSales
+FROM Store;
+
+select TransactionID, Store, Sales_Amount,
+ROW_NUMBER() OVER (partition by store ORDER BY Sales_Amount DESC) AS ROWNUM
+from store;
+
+drop table if exists employees;
+
+create table employees(
+employeeID INT,
+name varchar(100),
+department varchar(50),
+hiredate date
+);
+
+truncate table employees;
+
+insert into employees(employeeID, name, department, hiredate)
+values 
+(1, 'Alice', 'HR', '2020-05-01'),
+(1, 'Alice', 'HR', '2022-06-25'),
+(2, 'Bob', 'IT', '2021-07-10'),
+(3, 'Charlie', 'Finance', '2020-09-30'),
+(3, 'Charlie', 'Finance', '2022-05-22');
+
+select * from employees;
+
+with employeerank as(
+select employeeID, name, department, hiredate,
+ROW_NUMBER() over (partition by EmployeeID order by hiredate asc) as rownum
+from employees
+)
+
+select employeeID, name, department, hiredate from employeerank where rownum > 1;
+
+drop table if exists students;
+
+create table students(
+studentID INT,
+studentname varchar(100),
+examscore int
+);
+
+insert into students(studentID, studentname, examscore)
+values 
+(1, 'Alice', 95),
+(2, 'Bob', 90),
+(3, 'Charlie', 95),
+(4, 'David', 85),
+(5, 'Eva', 90);
+
+select * from students;
+
+select studentID, studentname, examscore,
+rank() over(order by examscore desc) as studentrank
+from students;
+
+select studentID, studentname, examscore,
+dense_rank() over(order by examscore desc) as studentrank
+from students;
+
+select studentID, studentname, examscore,
+percent_rank() over(order by examscore desc) as percentrank
+from students;
+
+create table employeesales(
+employeeID int,
+employeename varchar(100),
+salesamount decimal(10,2)
+);
+
+insert into employeesales (employeeID, employeename, salesamount) 
+values 
+(1, 'Alice', 10000),
+(2, 'Bob', 8500),
+(3, 'Charlie', 7500),
+(4, 'David', 6000),
+(5, 'Eva', 11000),
+(6, 'Frank', 4500),
+(7, 'Grace', 3000),
+(8, 'Hank', 4000),
+(9, 'Ivy', 8000),
+(10, 'Jack', 9500);
+
+select employeeID, employeename, salesamount,
+NTILE(4) OVER (order by salesamount desc) as performancegroup
+from employeesales;
+
+select * ,
+lag(Salary) over (partition by EmployeeID order by year) as PreviousSalary
+from EmployeeSalaries;
+
+select * ,
+lag(Salary) over (partition by EmployeeID order by year) as PreviousSalary,
+salary - lag(Salary) over (partition by EmployeeID order by year) as SalaryChange
+from EmployeeSalaries;
+
+drop table if exists employeesalesamount;
+
+Create table employeesalesamount(
+productID int,
+productname varchar(100),
+salesamount decimal(10,2),
+salesdate date
+);
+
+insert into employeesalesamount(productID, productname, salesamount, salesdate)
+values 
+(1, 'ProductA', 500.00, '2025-01-01'),
+(2, 'ProductA', 400.00, '2025-02-02'),
+(3, 'ProductA', 700.00, '2025-03-01'),
+(4, 'ProductA', 500.00, '2025-04-02');
+
+select * from employeesalesamount;
+
+select *,
+lead(salesamount) over (order by salesdate) as nextsaleamount
+from employeesalesamount;
+
+select *,
+lead(salesamount) over (order by salesdate) as nextmonthsales,
+salesamount - lead(salesamount) over (order by salesdate) as salesdifference
+from employeesalesamount;
+
+drop table if exists employee; 
+
+create table employee(
+employeeID int, 
+employeename varchar(100),
+department varchar(100),
+salary decimal(10,2),
+salarydate date
+);
+
+insert into employee(employeeID, employeename, department, salary, salarydate)
+values
+(1, 'Alice', 'HR', 5000.00, '2025-01-01'),
+(7, 'Grace', 'HR', 5500.00, '2025-01-07'),
+(4, 'David', 'HR', 6000.00, '2025-01-04'),
+(6, 'Frank', 'Engineering', 6500.00, '2025-01-06'),
+(2, 'Bob', 'Engineering', 7000.00, '2025-01-02'),
+(5, 'Eva', 'Engineering', 7500.00, '2025-01-05'),
+(3, 'Charlie', 'Engineering', 8000.00, '2025-01-03'),
+(8, 'Hank', 'Engineering', 8500.00, '2025-01-08');
+
+select distinct salary
+from employee
+order by salary desc
+limit 1 offset 2;
+
+create table employ(
+employee_id int auto_increment primary key, 
+first_name varchar(50),
+last_name varchar(50),
+position varchar(50),
+salary decimal(10,2)
+);
+
+create table contractors(
+contractor_id int auto_increment primary key, 
+first_name varchar(50),
+last_name varchar(50),
+position varchar(50),
+hourly_rate decimal(10,2)
+); 
+
+insert into employ(first_name, last_name, position, salary)
+values
+('Alice', 'Smith', 'Developer', 7000.00),
+('Bob', 'Johnson', 'Developer', 7500.00),
+('Charlie', 'Lee', 'Manager', 90000.00);
+
+insert into contractors(first_name, last_name, position, hourly_rate)
+values 
+('Dave', 'Williams', 'Developer', 40.00),
+('Eve', 'Brown', 'Tester', 35.00),
+('Bob', 'Johnson', 'Developer', 45.00);
+
+select * from employ
+union all
+select * from contractors;
+
+select first_name, last_name, position from employ
+union
+select first_name, last_name, position from contractors;
+
+create table customers(
+customer_id int auto_increment primary key,
+first_name varchar(50) not null,
+last_name varchar(50) not null,
+email varchar(50) not null,
+city varchar(50) not null
+);
+
+insert into customers(first_name, last_name, email, city)
+values 
+('John', 'Doe', 'john@example.com', 'New York'),
+('Jane', 'Smith', 'jane.smith@example.com', 'Los Angeles'),
+('Michael', 'Brown', 'michael.brown@example.com', 'Chicago'),
+('Emily', 'Johnson', 'emitly.johnson@example.com', 'Houston'),
+('Robert', 'Green', 'robert.green@example.com', 'Phoenix');
+
+select * from customers where email = 'john@example.com';
+
+explain analyze
+select *
+from customers
+where email='john@example.com';
+
+explain format=json
+select *
+from customers
+where email = 'john@explain.com';
+
+drop table if exists orders;
+
+create table orders(
+order_id int auto_increment,
+order_date date not null,
+customer_name varchar(50),
+amount decimal(10,2),
+primary key(order_id, order_date)
+)
+partition by range(year(order_date))(
+partition p_before_2020 values less than(2020),
+partition p_2020  values less than(2021),
+partition p_2021  values less than(2022),
+partition p_2022  values less than(2023),
+partition p_future values less than maxvalue
+);
+
+insert into orders(order_date, customer_name, amount)
+values 
+('2019-05-10', 'Alice', 100.00),
+('2020-01-15', 'Bob', 100.50), 
+('2021-12-01', 'Charlie', 300.50), 
+('2022-07-20', 'Diama', 150.75), 
+('2023-03-02', 'Edward', 500.50), 
+('2025-06-18', 'FutureMan', 9999.50); 
+
+select * from orders;
+
+select 
+partition_name,
+partition_method,
+partition_expression,
+subpartition_method,
+subpartition_expression
+from information_schema partitions
+where table_schema = 'test'
+and table_name = 'orders';
+
+show create table orders;
+
+explain format=json
+select * from orders where year(order_date=2021);
+
+create table sensor_data(
+	sensor_id int not null,
+    reading_time datetime not null,
+    reading_value decimal(10,2),
+    primary key(sensor_id, reading_time)
+)
+partition by hash(sensor_id)
+partitions 2;
+
+insert into sensor_data(sensor_id, reading_time, reading_value)
+values 
+(101, '2025-01-01 10:00:00', 23.50),
+(102, '2025-01-01 10:05:00', 24.10),
+(103, '2025-01-01 10:10:00', 27.75),
+(104, '2025-01-01 10:15:00', 25.00),
+(105, '2025-01-01 10:20:00', 20.00),
+(106, '2025-01-01 10:25:00', 21.60);
+
+explain format=json
+select * from sensor_data where sensor_id=101;
+
+create table events(
+event_id int auto_increment primary key,
+event_name varchar(100),
+event_date datetime,
+created_at timestamp default current_timestamp
+);
+
+insert into events(event_name, event_date)
+values 
+('Team Marketing', '2025-01-15 10:30:00'),
+('Conference', '2025-02-10 09:00:00'),
+('Online Webinar', '2025-03-05 15:45:00'),
+('Workshop', '2025-03-20 13:30:00');
+
+select * from events; 
+
+select event_id, event_name, event_date + INTERVAL 30 day as event_year from events; 
+
+-- Need to install timezone to make this query work -- 
+select 
+'2025-01-01 10:00:00' as my_time,
+convert_tz('2025-01-01 10:00:00', 'America/New_York', 'Asia/Kolkata') as ist_time;
+
+create table regex_samples(
+id int auto_increment primary key,
+sample_text varchar(100)
+);
+
+insert into regex_samples(sample_text) 
+values
+('apple'),
+('banana'),
+('cherry'),
+('data'),
+('elderberry'),
+('fig'),
+('grape'),
+('honeydew'),
+('running'),
+('123abc');
+
+select * from regex_samples;
+
+select * from regex_samples
+where sample_text REGEXP 'e$';
+
+select * from regex_samples
+where sample_text REGEXP '^(apple|banana)$';
+
+create table accounts(
+account_id int primary key,
+account_holder varchar(100),
+balance decimal(10,2)
+);
+
+insert into accounts(account_id, account_holder, balance)
+values
+(1, 'Alice', 5000.00);
+
+select * from accounts;
+
+update accounts set balance = balance - 1000 where account_id = 1;
+
+begin; 
+
+start transaction; 
+rollback;
+commit; 
+
+grant select, insert on test.* to 'jane_doe'@'localhost';
+flush privileges; 
+
+revoke select, insert on test.* from 'jane_doe'@'localhost';
+flush privileges; 
+
+
+create table dim_product_type1(
+product_id int primary key,
+product_title varchar(255),
+category varchar(100),
+brand varchar(100)
+);
+
+insert into dim_product_type1(product_id, product_title, category, brand)
+values 
+(101, 'Amazon Echo Dot 3rd Gen', 'Smart Speakers', 'Amazon');
+
+select * from dim_product_type1
+
+update dim_product_type1
+set product_title = 'Amazon Echo Dot (3rd Gen)'
+where product_id = 101;
+
+select * from dim_product_type1
+
+create table dim_seller_type2(
+seller_key int primary key,
+seller_id int,
+seller_name varchar(255),
+store_location varchar(255),
+effective_date DATE,
+end_date DATE,
+is_current BOOLEAN
+);
+
+insert into dim_seller_type2(seller_key, seller_id, seller_name, store_location, effective_date, end_date, is_current)
+values
+(1, 501, 'Best Seller Inc.', 'Seattle, WA', '2022-01-01', NULL, TRUE);
+
+select * from dim_seller_type2;
+
+update dim_seller_type2
+set end_date = '2023-01-15',
+is_current=FALSE
+where seller_id=501 AND is_current = TRUE;
+
+
+set sql_safe_updates = FALSE;
+
+select * from dim_seller_type2 where seller_id = 501;
+
+insert into dim_seller_type2(seller_key, seller_id, seller_name, store_location, effective_date, end_date, is_current)
+values
+(2, 501, 'Best Seller Inc.', 'Los Angeles, CA', '2022-01-15', NULL, TRUE);
+
+select * from dim_seller_type2;
+
+create table dim_product_type3(
+product_id int primary key,
+product_title varchar(255),
+current_category varchar(100),
+previous_category varchar(100)
+);
+
+insert into dim_product_type3(product_id, product_title, current_category, previous_category)
+values 
+(101, 'Amazon Fire TV Stick', 'Streaming Devices', NULL);
+
+update dim_product_type3
+set previous_category = current_category,
+current_category = 'Media Players'
+where product_id=101;
+
+update dim_product_type3
+set previous_category = current_category,
+current_category = 'Audio Players'
+where product_id=101;
+
+select * from dim_product_type3; 
+
+-- Spotify Data Analysis --
+-- Zomato Data Analysis --
+-- Uber Data Analysis --
+-- Instagram Data analysis -- 
+
+-- Each and every app eg: Spotify, Zomato, Uber, Instagram, Gpay > stores data in 50-100 tables --
+
+/*
+Customer Requirement 
+
+count(Order ID) 
+case when count(Order ID)
+*/

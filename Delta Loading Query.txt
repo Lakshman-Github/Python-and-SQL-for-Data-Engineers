@@ -1,0 +1,66 @@
+create table source_employee(
+employee_id int,
+employee_name varchar(100),
+department varchar(50),
+salary decimal(10,2),
+last_updated datetime
+); 
+
+insert into source_employee(employee_id, employee_name, department, salary, last_updated)
+values 
+(1, 'Ravi', 'IT', 30000, '2026-11-14 10:00:00'),
+(2, 'Priya', 'HR', 35000, '2026-11-14 11:00:00'),
+(3, 'Arun', 'Finance', 40000, '2026-11-15 09:00:00');
+
+create table target_employee(
+employee_id int,
+employee_name varchar(100),
+department varchar(50),
+salary decimal(10,2),
+last_updated datetime
+);
+
+insert into target_employee
+select * 
+from source_employee;
+
+insert into source_employee
+values 
+(4, 'Divya', 'IT', 45000, '2026-11-16 10:00:00');
+
+update source_employee
+set salary = 40000
+	last_updated = '2026-11-16 11:00L00'
+where employee_id = 1;
+
+insert into target_employee(
+	employee_id,
+    employee_name,
+    department,
+    salary,
+    last_updated
+)
+select 
+	employee_id,
+    employee_name,
+    department,
+    salary,
+    last_updated
+from source_employee
+where last_updated > (
+	select max(last_updated)
+    from target_employee
+)
+ON duplicate key update
+	employee_name = values(employee_name),
+    department = values(department),
+    salary = values(salary),
+    last_updated = values(last_updated);
+    
+
+alter table target_employee
+add primary key(employee_id);
+
+select * from target_employee 
+order by employee_id; 
+

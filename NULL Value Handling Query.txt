@@ -1,0 +1,4 @@
+select 
+    employee_name,
+    coalesce(depatment, 'Not Assigned') as department
+from employee;

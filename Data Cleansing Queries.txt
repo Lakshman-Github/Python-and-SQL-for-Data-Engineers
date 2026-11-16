@@ -1,0 +1,32 @@
+select * from employee
+where employee_name IS NULL;
+
+update employee
+set department = 'Not Assigned'
+where department IS NULL;
+
+select employee_id, count(*) from employee
+group by employee_id
+having count(*) > 1;
+
+update employee
+set employee_name = TRIM(employee_name);
+
+update employee
+set department = UPPER(department);
+
+update employee
+set city = 'Chennai'
+where city IN ('Chennai City', 'CHENNAI', 'chennai');
+
+select * from employee where salary < 0;
+
+delete from employee where salary < 0;
+
+select * from employee 
+where email not like '%_@_%._%';
+
+select email, count(*) from employee
+group by email 
+having count(*) > 1;
+

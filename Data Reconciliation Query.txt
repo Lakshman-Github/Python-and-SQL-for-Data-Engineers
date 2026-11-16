@@ -1,0 +1,23 @@
+select 
+	(select count(*) from source_employee) as source_count;
+    (select count(*) from target_employee) as target_count;
+    
+select 
+	(select sum(salary) from source_employee) as source_salary;
+    (select sum(salary) from target_employee) as target_salary;
+    
+select * from source_employee s
+where not exists (
+	select 1
+    from target_employee t 
+    where t.employee_id = s.employee_id
+);
+
+select 
+	s.employee_id,
+    s.salary as source_salary,
+    t.salary as target_salary
+from source_employee s
+join target_employee t
+	on s.employee_id = t.employee_id
+where s.salary <> t.salary;

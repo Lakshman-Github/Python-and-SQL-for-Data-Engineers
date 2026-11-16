@@ -1,0 +1,20 @@
+create table employee(
+employee_id int primary key,
+employee_name varchar(100),
+salary decimal(10,2),
+created_date datetime default current_timestamp,
+updated_date datetime default current_timestamp
+	on update current_timestamp
+);
+
+insert into employee(employee_id, employee_name, salary)
+values 
+(1, 'Ravi', 30000),
+(2, 'Priya', 35000),
+(3, 'Arun', 40000);
+
+update employee
+set salary = 45000
+where employee_id = 1;
+
+select employee_id, employee_name, salary, created_date, updated_date from employee;

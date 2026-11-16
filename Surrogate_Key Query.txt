@@ -1,0 +1,15 @@
+create table dim_customer(
+customer_key int auto_increment primary key,
+customer_id int,
+customer_name varchar(100),
+city varchar(50)
+);
+
+insert into dim_customer
+(customer_id, customer_name, city)
+values 
+(101, 'Ravi', 'Chennai'),
+(102, 'Priya', 'Bangalore'),
+(103, 'Arun', 'Hyderabad');
+
+select * from dim_customer; 

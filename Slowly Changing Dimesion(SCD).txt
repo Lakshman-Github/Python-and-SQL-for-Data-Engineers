@@ -1,0 +1,67 @@
+-- Slowly Changing Dimesion --
+
+-- Type 1: No history of data is stored --
+
+create table dim_customer(
+customer_id INT primary key,
+customer_name varchar(100),
+city varchar(50)
+);
+
+insert into dim_customer
+values(1, 'Ravi', 'Chennai');
+
+update dim_customer
+set city = 'Bangalore'
+where customer_id = 1;
+
+-- Type 2: All history of data is stored -- 
+
+create table dim_customer (
+customer_key INT auto_increment primary key, 
+customer_id int,
+customer_name varchar(100),
+city varchar(50),
+start_date date,
+end_date date,
+is_current char(1) 
+);
+
+insert into dim_customer(customer_id, customer_name, start_date, end_date, is_current)
+values 
+(1, 'Ravi', 'Chennai', '2026-01-01', NULL, 'Y');
+
+
+update dim_customer
+set end_date = '2026-11-16',
+	is_current = 'N'
+where customer_id = 1
+and is_current = 'Y';
+
+insert into dim_customer(customer_id, customer_name, start_date, end_date, is_current)
+values 
+(1, 'Ravi', 'Bangalore', '2026-11-16', NULL, 'Y');
+
+-- Type 3: Only Previous and Current value is stored -- 
+
+create table dim_customer(
+customer_id int primary key,
+customer_name varchar(100),
+current_city varchar(50),
+previous_city varchar(50)
+);
+
+insert into dim_customer
+values
+(1, 'Ravi', 'Chennai', NULL);
+
+update dim_customer
+set previous_city = current_city,
+	current_city = 'Bangalore'
+where customer_id = 1;
+
+
+
+
+
+

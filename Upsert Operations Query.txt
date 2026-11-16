@@ -1,0 +1,34 @@
+create table source_employee(
+employee_id int primary key,
+employee_name varchar(100),
+department varchar(50),
+salary decimal(10,2)
+); 
+
+insert into source_employee
+values 
+(1, 'Ravi', 'IT', 30000),
+(2, 'Priya', 'HR', 35000),
+(3, 'Arun', 'Finance', 40000);
+
+create table target_employee(
+employee_id int primary key,
+employee_name varchar(100),
+department varchar(50),
+salary decimal(10,2)
+);
+
+insert into target_employee
+values
+(1, 'Ravi', 'IT', 25000),
+(2, 'Priya', 'HR', 35000);
+
+insert into target_employee(employee_id, employee_name, department, salary)
+select employee_id, employee_name, department, salary from source_employee
+on duplicate key update
+	employee_name = values(employee_name),
+    department = values(department),
+    salary = values(salary);
+    
+
+select * from target_employee; 
