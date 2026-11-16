@@ -1,0 +1,53 @@
+'''
+id,name,department,salary
+1,Ravi,IT,30000
+2,Priya,HR,35000
+3,Arun,IT,40000
+4,Kumar,Finance,-5000
+5,Divya,HR,50000
+'''
+
+import pandas as pd
+
+# Read CSV file
+df = pd.read_csv("employees.csv")
+
+# 1. Check missing values
+print("Missing Values:")
+print(df.isnull().sum())
+
+# 2. Check duplicate records
+print("Duplicate Records:")
+print(df.duplicated().sum())
+
+# 3. Check negative salaries
+invalid_salary = df[df["salary"] < 0]
+
+print("Invalid Salary Records:")
+print(invalid_salary)
+
+# 4. Check whether ID is unique
+print("Duplicate IDs:")
+print(df["id"].duplicated().sum())
+
+# 5. Validate department values
+valid_departments = ["IT", "HR", "Finance"]
+
+invalid_department = df[
+    ~df["department"].isin(valid_departments)
+]
+
+print("Invalid Departments:")
+print(invalid_department)
+
+# 6. Display validation result
+if (
+    df.isnull().sum().sum() == 0
+    and df.duplicated().sum() == 0
+    and (df["salary"] >= 0).all()
+    and df["id"].is_unique
+    and df["department"].isin(valid_departments).all()
+):
+    print("Data Validation Successful!")
+else:
+    print("Data Validation Failed!")

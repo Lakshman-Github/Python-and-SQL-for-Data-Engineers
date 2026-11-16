@@ -1,0 +1,31 @@
+import pandas as pd 
+
+df = pd.read_json("employees.json")
+
+print(df)
+
+'''
+[
+    {
+       "id": 1,
+       "name": "Ravi",
+       "department": "IT",
+       "salary": 30000
+    },
+    {
+        "id": 2,
+        "name": "Priya",
+        "department": "HR",
+        "salary": 35000
+    },
+    {
+        "id": 3,
+        "name": "Arun",
+        "department": "IT",
+        "salary": 40000
+    }
+]
+
+[] - Entire table 
+{} - Datas(Fields and Records)
+'''

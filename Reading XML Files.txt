@@ -1,0 +1,44 @@
+import xml.tree.ElementTree as ET
+
+#Read XML file
+tree = ET.parse("employees.xml")
+
+#Get root element 
+root = tree.getroot()
+
+#Read employee details
+for employee in root.findall("employee"):
+    
+    id = employee.find("id").text
+    name = employee.find("name").text
+    department = employee.find("department").text
+    salary = employee.find("salary").text
+    
+    print(id, name, department, salary)
+
+
+'''
+<employees>
+    <employee>
+        <id>1</id>
+        <name>Ravi</name>
+        <department>IT</department>
+        <salary>30000</salary>
+    </employee>
+    
+    <employee>
+        <id>2</id>
+        <name>Priya</name>
+        <department>HR</department>
+        <salary>35000</salary>
+    </employee>
+    
+    <employee>
+        <id>3</id>
+        <name>Arun</name>
+        <department>IT</department>
+        <salary>40000</salary>
+    </employee>
+    
+</employees>
+'''

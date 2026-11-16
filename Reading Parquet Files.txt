@@ -1,0 +1,12 @@
+import pandas as pd 
+
+df = pd.read_parquet("employees.parquet")
+
+print(df)
+
+'''
+    "id": [1, 2, 3, 4],
+    "name": ["Ravi", "Priya", "Arun", "Kumar"],
+    "department": ["IT", "HR", "IT", "Finance"],
+    "salary": [30000, 35000, 40000, 45000]
+'''

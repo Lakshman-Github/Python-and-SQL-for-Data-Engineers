@@ -1,0 +1,54 @@
+#Create a file and write content
+
+file = open("sample.txt", "w")
+
+file.write("Welcome to Python File Handling")
+file.close()
+
+print("File created successfully")
+
+--------------------------------------------------
+
+#Read a File
+
+file = open("sample.txt", "r")
+
+data = file.read()
+
+print(data)
+
+file.close()
+
+---------------------------------------------------
+
+#Append data to a file
+
+file = open("sample.txt","a")
+
+file.write("\nLearning Data Engineering")
+
+file.close()
+
+print("Data appended successfully")
+
+----------------------------------------------------
+
+#Read a file line by line 
+
+file = open("sample.txt","r")
+
+for line in file:
+    print(line)
+    
+file.close()
+
+-----------------------------------------------------
+
+#Delete a file
+
+import os 
+
+os.remove("sample.txt")
+
+print("File deleted successfully")
+

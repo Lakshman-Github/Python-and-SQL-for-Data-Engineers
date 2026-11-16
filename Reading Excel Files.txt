@@ -1,0 +1,14 @@
+import pandas as pd 
+
+df = pd.read_excel("employees.xlsx")
+
+print(df)
+
+'''
+id name   department salary
+1  Priya  IT         30000
+2  Ravi   HR         35000
+3  Arun   IT         40000
+4  Kumar  Finance    45000
+5  Divya  HR         50000
+'''

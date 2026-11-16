@@ -1,0 +1,96 @@
+#Create a directory
+
+import os 
+
+#Create a folder
+os.mkdir("Data Engineering")
+
+print("Directory created successfully")
+
+------------------------------------------------
+
+#Get the current working Directory
+
+import os 
+
+print(os.getcwd())
+
+------------------------------------------------
+
+#List all files and folders
+
+import os 
+
+#Display files and folders
+files = os.listdir(".")
+
+print(files)
+
+-------------------------------------------------
+
+#Create multiple directories 
+
+import os 
+
+os.makedirs("DataEngineering/CSV/Output")
+
+print("Directories created successfully")
+
+-------------------------------------------------
+
+#Rename a directory 
+
+os.rename("DataEngineering", "PythonProjects")
+
+print("Directory renamed successfully")
+
+-------------------------------------------------
+
+#Delete an empty directory 
+
+import os 
+
+os.rmdir("PythonProjects")
+
+print("Directory deleted successfully")
+
+--------------------------------------------------
+
+#Check whether a directory exists
+
+import os 
+
+if os.path.exists("DataEngineering"):
+    print("Directory exists")
+else:
+    print("Directory does not exist")
+    
+---------------------------------------------------
+
+#Important Directory functions 
+
+'''
+Function	        Purpose
+os.mkdir()	        Create a directory
+os.makedirs()	    	Create nested directories
+os.getcwd()	        Get current directory
+os.listdir()	    	List files and folders
+os.chdir()	        Change current directory
+os.rename()	        Rename a directory
+os.rmdir()	        Delete an empty directory
+os.path.exists()	Check whether a path exists
+'''
+
+-----------------------------------------------------
+
+#Practical Data Engineering Example 
+
+import os 
+
+folders = ["input", "processed", "ouput", "logs"]
+
+for folder in folders: 
+    os.makedirs(f"ETL_Projects/{folder}",exist_ok=True)
+    
+print("ETL directory structure created!")
+

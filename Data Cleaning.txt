@@ -1,0 +1,41 @@
+'''
+id, name, department, salary 
+1, Ravi, IT, 30000
+2, Priya, HR, 35000
+3, Arun, IT, 
+4, Kumar, Finance, 45000
+5, Kumar, Finance, 45000
+5, , HR, 50000
+'''
+
+import pandas as pd 
+
+#Read CSV files 
+
+df = pd.read_csv("employees.csv")
+
+#Display original data
+print("Original Data:")
+print(df)
+
+#Check missing values 
+print(df.isnull().sum())
+
+#Remove duplicate records
+df = df.drop_duplicates()
+
+#Fill missing values 
+df["name"] = df["name"].fillna("Unknown")
+df["salary"] = df["salary"].fillna(0)
+
+#Remove empty rows
+df = df.dropna()
+
+# Remove extra spaces from names
+df["name"] = df["name"].str.strip()
+
+# Save cleaned data 
+df.to_csv("cleaned_employees.csv", index=False)
+
+print("Data Cleaning Completed!")
+print(df)
