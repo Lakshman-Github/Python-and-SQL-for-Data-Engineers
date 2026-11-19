@@ -1,0 +1,10 @@
+customers = [101, 102, 103, 101, 104, 102, 105]
+
+duplicates = []
+
+
+for customer in customers:
+	if  customers.count(customer)>1 and customer not in duplicates:
+		duplicate.append(customer)
+
+print(duplicates)

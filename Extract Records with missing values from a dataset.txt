@@ -1,0 +1,18 @@
+employees = [
+    {"id": 1, "name": "Ravi", "salary": 30000},
+    {"id": 2, "name": "Priya", "salary": None},
+    {"id": 3, "name": None, "salary": 40000},
+    {"id": 4, "name": "Arun", "salary": 35000}
+]
+
+
+invalid_records = []
+
+for employee in employees:
+    if None in employee.values():
+        invalid_records.append(employee)
+        
+    print("Invalid Records:")
+    
+for record in invalid_records:
+    print(record)

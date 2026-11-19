@@ -1,0 +1,23 @@
+sales = [
+    {"store": "A", "amount": 1000},
+    {"store": "B", "amount": 2000},
+    {"store": "A", "amount": 1500},
+    {"store": "B", "amount": 2500},
+    {"store": "C", "amount": 3000}
+]
+
+total_sales={}
+
+for transaction in sales:
+    store = transaction["store"]
+    amount = transaction["amount"]
+    
+    if store in total_sales:
+        total_sales[store]+=amount
+    else:
+        total_sales[store]=amount
+        
+print("Total Sales:",total_sales)
+
+
+

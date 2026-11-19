@@ -1,0 +1,7 @@
+salaries = [25000, 40000, 60000, 40000, 50000]
+
+unique_salary = list(set(salaries))
+
+unique_salary.sort(reverse=True) #descending order
+
+print("Second Highest Salary:",unique_salary[1])
