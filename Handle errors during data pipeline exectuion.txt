@@ -1,0 +1,17 @@
+import pandas as pd 
+
+try:
+    df = pd.read_csv("customer.csv")
+    
+    print("File read successfully")
+    
+    print(df)
+    
+except FileNotFoundError:
+    print("Error: CSV file not found!")
+    
+except Exception as e:
+    print("Error occured:",e)
+    
+finally:
+    print("Pipeline execution completed!")

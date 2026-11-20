@@ -1,0 +1,14 @@
+import pandas as pd 
+
+data = {
+    "customer_id": [1,2,3,2,4,1],
+    "name": ["Ravi", "Priya", "Arun", "Priya", "John", "Ravi"],
+    "city": ["Chennai", "Bangalore", "Mumbai", "Bangalore", 
+    "Delhi", "Chennai"]
+}
+
+df=pd.DataFrame(data)
+
+df = df.drop_duplicates()
+
+print(df)

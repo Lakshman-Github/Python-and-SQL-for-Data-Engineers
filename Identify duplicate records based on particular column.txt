@@ -1,0 +1,15 @@
+import pandas as pd 
+
+data = {
+    "transaction_id": [101, 102, 103, 102, 104, 101],
+    "amount": [500, 600, 700, 600, 800, 500]
+}
+
+df = pd.DataFrame(data)
+
+duplicates = df[df.duplicated(
+    subset=["transaction_id"],
+    keep=False
+)]
+
+print(duplicates)

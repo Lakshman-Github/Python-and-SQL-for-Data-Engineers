@@ -1,0 +1,10 @@
+select distinct salary 
+from employees 
+order by salary desc 
+limit 1 offset 1; 
+
+-- limit 1 returns 1 rows --
+-- limit 2 returns 2 rows --
+
+-- offset 1 skips 1st row --
+-- offset 2 skips 2nd row --

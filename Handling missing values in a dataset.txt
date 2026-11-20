@@ -1,0 +1,13 @@
+import pandas as pd 
+
+data = {
+    "id": [1,2,3,4],
+    "name": ["Ravi", "Priya", "Arun", "John"],
+    "salary": [30000, None, 40000, None]
+}
+
+df =  pd.DataFrame(data)
+
+df["salary"] = df["salary"].fillna(0)
+
+print(df)

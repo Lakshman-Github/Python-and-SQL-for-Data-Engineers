@@ -1,0 +1,6 @@
+select * 
+from source_customers
+where updated_date > (
+  select coalesce(max(updated_date), '1900-01-01')
+  from target_customers
+);
