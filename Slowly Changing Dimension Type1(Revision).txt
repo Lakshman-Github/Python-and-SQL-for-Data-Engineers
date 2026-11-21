@@ -1,0 +1,4 @@
+update dim_customer
+set city = 'Bangalore'
+where customer_id = 101;
+

@@ -1,0 +1,14 @@
+employees = [
+    {"name": "Ravi", "salary": 30000},
+    {"name": "Priya", "salary": 50000},
+    {"name": "Arun", "salary": 40000}
+]
+
+highest salary = 0
+
+for emp in employees:
+    if emp["salary"] > highest salary:
+        highest salary = emp["salary"]
+        
+print(highest salary)
+        

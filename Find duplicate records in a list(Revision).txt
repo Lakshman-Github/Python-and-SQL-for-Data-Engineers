@@ -1,0 +1,9 @@
+transactions = [101, 102, 103, 102, 104, 101]
+
+duplicates = []
+
+for num in transactions:
+    if transactions.count(num)>1 and num not in duplicates:
+        duplicates.append(num)
+        
+print(duplicates)

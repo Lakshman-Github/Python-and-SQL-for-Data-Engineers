@@ -1,0 +1,9 @@
+transactions = [101, 102, 103, 102, 104, 101]
+
+unique = []
+
+for num in transactions:
+    if transactions.count(num) == 1:
+        unique.append(num)
+        
+print(unique)

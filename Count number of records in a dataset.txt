@@ -1,0 +1,9 @@
+customers = [
+    {"id": 1, "name": "Ravi"},
+    {"id": 2, "name": "Priya"},
+    {"id": 3, "name": "Arun"},
+    {"id": 4, "name": "John"}
+    
+]
+
+print("Total records:",len(customers))

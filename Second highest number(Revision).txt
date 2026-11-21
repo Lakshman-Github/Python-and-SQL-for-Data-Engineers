@@ -1,0 +1,9 @@
+transactions = [101, 102, 103, 102, 104, 101]
+
+unique = list(set(transactions))
+
+unique.sort(reverse=True)
+
+second_highest_number = unique[1]
+
+print(second_highest_number)
