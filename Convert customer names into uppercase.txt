@@ -1,0 +1,15 @@
+#Easy method 
+customers = ["ravi", "Priya", "arun", "john"]
+
+for customer in customers: 
+    print(customer.upper(), end=" ")
+    
+#Another method 
+customers = ["ravi", "Priya", "arun", "john"]
+
+cleaned_names = []
+
+for name in customers:
+    cleaned_names.append(name.upper())
+    
+print(cleaned_names)

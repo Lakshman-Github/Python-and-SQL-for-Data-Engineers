@@ -1,0 +1,6 @@
+select 
+    customer_id,
+    count(transaction_id) as total_transactions
+from total_transactions
+group by customer_id
+having count(transaction_id) > 2

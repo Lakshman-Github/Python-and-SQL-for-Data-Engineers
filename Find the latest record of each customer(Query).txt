@@ -1,0 +1,14 @@
+select *
+from (
+    select 
+        customer_id,
+        customer_name,
+        city,
+        updated_date,
+        row_number() over (
+            partition by customer_id
+            order by updated_date desc
+            ) as rn 
+    from customer_updates
+) as latest records
+where rn = 1;

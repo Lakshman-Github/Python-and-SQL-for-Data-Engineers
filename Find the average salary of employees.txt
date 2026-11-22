@@ -1,0 +1,38 @@
+#static input method 
+employees = [
+    {"name": "Ravi", "salary": 30000},
+    {"name": "Priya", "salary": 50000},
+    {"name": "Arun", "salary": 40000}
+]
+
+total_salary = 0
+average = 0
+
+for employee in employees:
+    total_salary = total_salary + employee["salary"]
+    average = total_salary/len(employees)
+    
+print("Average Salary:",average)
+
+
+#Dynamic input method
+employees = []
+n = int(input("Enter number of employees: "))
+
+for i in range(n):
+    name = input("Enter employee name: ")
+    salary = int(input("Enter employee salary: "))
+    
+    employees.append({
+        "name": name,
+        "salary": salary
+    })
+    
+total_salary = 0
+average = 0
+
+for employee in employees:
+    total_salary = total_salary + employee["salary"]
+    average = total_salary/len(employees)
+    
+print("Average Salary:",average)

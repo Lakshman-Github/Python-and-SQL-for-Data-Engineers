@@ -1,0 +1,7 @@
+select 
+    transaction_id,
+    sales_amount,
+    sum(sales_amount) over (
+        order by transaction_id    
+    ) as running_total
+from transactions;
