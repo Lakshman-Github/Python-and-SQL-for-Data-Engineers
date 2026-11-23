@@ -1,0 +1,11 @@
+employees = [
+    {"name": "Ravi", "salary": 30000},
+    {"name": "Priya", "salary": None},
+    {"name": "Arun", "salary": 40000}
+]
+
+for employee in employees: 
+    if employee["salary"] is None:
+        employee["salary"] = 0
+        
+print(employees)

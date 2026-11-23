@@ -1,0 +1,9 @@
+transactions = [101, 102, 103, 102, 104, 101]
+
+unique_transactions = []
+
+for transaction in transactions:
+    if transaction not in unique_transactions:
+        unique_transactions.append(transaction)
+        
+print("Unique Transactions:",unique_transactions)

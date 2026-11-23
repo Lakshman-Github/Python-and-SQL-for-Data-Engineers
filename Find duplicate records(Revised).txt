@@ -1,0 +1,4 @@
+select transcation_id, count(*) 
+from transactions
+group by transaction_id
+having count(*) > 1
