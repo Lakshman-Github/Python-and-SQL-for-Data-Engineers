@@ -1,0 +1,22 @@
+SELECT RESULT
+FROM
+(
+    SELECT
+        NAME || '(' || SUBSTR(OCCUPATION, 1, 1) || ')' AS RESULT,
+        1 AS S,
+        NAME AS N,
+        0 AS C
+    FROM OCCUPATIONS
+
+    UNION ALL
+
+    SELECT
+        'There are a total of ' || COUNT(*) || ' ' ||
+        LOWER(OCCUPATION) || 's.' AS RESULT,
+        2 AS S,
+        OCCUPATION AS N,
+        COUNT(*) AS C
+    FROM OCCUPATIONS
+    GROUP BY OCCUPATION
+) AS T
+ORDER BY S, C, N;

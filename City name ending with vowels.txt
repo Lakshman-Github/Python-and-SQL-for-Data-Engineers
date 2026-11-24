@@ -1,0 +1,2 @@
+select distinct city from station 
+where UPPER(SUBSTR(CITY, LENGTH(CITY),1)) IN ('A', 'E', 'I', 'O', 'U');
